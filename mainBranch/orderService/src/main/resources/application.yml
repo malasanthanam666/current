@@ -1,0 +1,30 @@
+spring:
+  # MongoDB Configuration
+  mongodb:
+    host: localhost
+    port: 27017
+    database: order
+
+  # Apache Kafka Configuration
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      batch-size: 16384
+      linger-ms: 1
+      buffer-memory: 33554432
+
+    properties:
+      security.protocol: PLAINTEXT
+
+    template:
+      default-topic: order-events
+
+# Custom Order Event Configuration
+order:
+  event:
+    topicName: order-events
